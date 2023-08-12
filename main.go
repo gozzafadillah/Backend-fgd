@@ -96,6 +96,7 @@ func main() {
 	routeController.Init(e)
 
 	appPort := fmt.Sprintf(":%s", os.Getenv("APP_PORT"))
+	e.Logger.Fatal(e.Start(appPort))
 
 	// go func() {
 	// 	if err := e.StartTLS(appPort, "cert.pem", "key.pem"); err != nil && err != http.ErrServerClosed {
