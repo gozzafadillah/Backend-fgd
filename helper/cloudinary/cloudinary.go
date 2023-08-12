@@ -1,7 +1,6 @@
 package cloudinary
 
 import (
-	"charum/util"
 	"context"
 	"fmt"
 	"mime/multipart"
