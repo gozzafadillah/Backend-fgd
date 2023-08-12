@@ -97,11 +97,11 @@ func main() {
 
 	appPort := fmt.Sprintf(":%s", os.Getenv("APP_PORT"))
 
-	go func() {
-		if err := e.StartTLS(appPort, "cert.pem", "key.pem"); err != nil && err != http.ErrServerClosed {
-			e.Logger.Fatal("shutting down the server")
-		}
-	}()
+	// go func() {
+	// 	if err := e.StartTLS(appPort, "cert.pem", "key.pem"); err != nil && err != http.ErrServerClosed {
+	// 		e.Logger.Fatal("shutting down the server")
+	// 	}
+	// }()
 
 	wait := _util.GracefulShutdown(context.Background(), 2*time.Second, map[string]_util.Operation{
 		"database": func(ctx context.Context) error {
