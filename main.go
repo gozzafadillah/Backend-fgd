@@ -39,14 +39,15 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"os"
 )
 
 func main() {
 	e := echo.New()
 
-	database := _mongo.Init(_util.GetConfig("DB_NAME"))
-	cloudinary := _cloudinary.Init(_util.GetConfig("CLOUDINARY_UPLOAD_FOLDER"))
-	mailgun := _mailgun.Init(_util.GetConfig("MAILGUN_DOMAIN"), _util.GetConfig("MAILGUN_API_KEY"))
+	database := _mongo.Init(os.Getenv("DB_NAME"))
+	cloudinary := _cloudinary.Init(os.Getenv("CLOUDINARY_UPLOAD_FOLDER"))
+	mailgun := _mailgun.Init(os.Getenv("MAILGUN_DOMAIN"), os.Getenv("MAILGUN_API_KEY"))
 
 	userRepository := _driver.NewUserRepository(database)
 	topicRepository := _driver.NewTopicRepository(database)
@@ -94,7 +95,7 @@ func main() {
 
 	routeController.Init(e)
 
-	appPort := fmt.Sprintf(":%s", _util.GetConfig("APP_PORT"))
+	appPort := fmt.Sprintf(":%s", os.Getenv("APP_PORT"))
 
 	go func() {
 		if err := e.StartTLS(appPort, "cert.pem", "key.pem"); err != nil && err != http.ErrServerClosed {

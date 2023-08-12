@@ -1,13 +1,13 @@
 package mongo_driver
 
 import (
-	"charum/util"
 	"context"
 	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"os"
 )
 
 func Init(databaseName string) *mongo.Database {
@@ -15,9 +15,9 @@ func Init(databaseName string) *mongo.Database {
 	defer cancel()
 
 	// Make MongoDB URI
-	dbUser := util.GetConfig("DB_USER")
-	dbPass := util.GetConfig("DB_PASS")
-	dbHost := util.GetConfig("DB_HOST")
+	dbUser := os.Getenv("DB_USER")
+	dbPass := os.Getenv("DB_PASS")
+	dbHost := os.Getenv("DB_HOST")
 	mongodbURI := fmt.Sprintf("mongodb+srv://%s:%s@%s/?retryWrites=true&w=majority", dbUser, dbPass, dbHost)
 
 	// Set client options

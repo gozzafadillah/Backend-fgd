@@ -10,6 +10,7 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/cloudinary/cloudinary-go/v2/api"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
+	"os"
 )
 
 type Function interface {
@@ -27,7 +28,7 @@ var (
 )
 
 func Init(folderName string) Function {
-	cld, err := cloudinary.NewFromParams(util.GetConfig("CLOUDINARY_CLOUD_NAME"), util.GetConfig("CLOUDINARY_API_KEY"), util.GetConfig("CLOUDINARY_API_SECRET"))
+	cld, err := cloudinary.NewFromParams(os.Getenv("CLOUDINARY_CLOUD_NAME"), os.Getenv("CLOUDINARY_API_KEY"), os.Getenv("CLOUDINARY_API_SECRET"))
 	if err != nil {
 		panic(err)
 	}

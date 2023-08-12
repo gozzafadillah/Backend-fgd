@@ -8,6 +8,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"os"
 )
 
 type JWTCustomClaims struct {
@@ -15,7 +16,7 @@ type JWTCustomClaims struct {
 	jwt.RegisteredClaims
 }
 
-var JWTSecretKey = GetConfig("JWT_SECRET_KEY")
+var JWTSecretKey = os.Getenv("JWT_SECRET_KEY")
 
 func GenerateToken(uid string, role string) string {
 	claims := JWTCustomClaims{
