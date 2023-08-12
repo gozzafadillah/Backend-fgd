@@ -2,6 +2,7 @@ package mongo_driver
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -17,6 +18,7 @@ func Init(databaseName string) *mongo.Database {
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
 	dbHost := os.Getenv("DB_HOST")
+	fmt.println(dbUser, dbPass, dbHost)
 	mongodbURI := "mongodb://mongo:U73R5S6hkwjlEwAy4e3H@containers-us-west-45.railway.app:5758"
 
 	// Set client options
